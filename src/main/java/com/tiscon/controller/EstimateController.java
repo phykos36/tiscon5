@@ -62,7 +62,7 @@ public class EstimateController {
      * @param model 遷移先に連携するデータ
      * @return 遷移先
      */
-    @PostMapping(value = "submit", params = "backToTop")
+    @PostMapping(value = "confirm", params = "backToTop")
     String backToTop(Model model) {
         return "top";
     }
@@ -74,7 +74,7 @@ public class EstimateController {
      * @param model         遷移先に連携するデータ
      * @return 遷移先
      */
-    @PostMapping(value = "submit", params = "confirm")
+    @PostMapping(value = "confirm", params = "confirm")
     String confirm(UserOrderForm userOrderForm, Model model) {
 
         model.addAttribute("prefectures", estimateDAO.getAllPrefectures());
@@ -89,7 +89,7 @@ public class EstimateController {
      * @param model         遷移先に連携するデータ
      * @return 遷移先
      */
-    @PostMapping(value = "result", params = "backToInput")
+    @PostMapping(value = "input", params = "backToInput")
     String backToInput(UserOrderForm userOrderForm, Model model) {
         model.addAttribute("prefectures", estimateDAO.getAllPrefectures());
         model.addAttribute("userOrderForm", userOrderForm);

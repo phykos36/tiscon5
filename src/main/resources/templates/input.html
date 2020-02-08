@@ -13,7 +13,7 @@
 <body>
 <nav th:insert="header.html :: header"></nav>
 <div class="container">
-  <form th:action="@{/submit}" th:object="${userOrderForm}" class="form-horizontal" method="post">
+  <form th:action="@{/confirm}" th:object="${userOrderForm}" class="form-horizontal" method="post">
     <h1>お見積り情報入力</h1>
     <ul th:if="${#fields.hasErrors('all')}">
       <li th:each="err : ${#fields.errors('all')}" th:text="${err}"></li>
@@ -85,7 +85,7 @@
       </fieldset>
       <div class="form-group">
         <div class="text-center">
-          <button type="submit" name="backToTop" class="btn btn-primary">TOPへ戻る</button>
+          <a class="btn btn-primary" th:href="@{/}" role="button">TOPへ戻る</a>
           <button type="submit" name="confirm" class="btn btn-primary">確認</button>
         </div>
       </div>
