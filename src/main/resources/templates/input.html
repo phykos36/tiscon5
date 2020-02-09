@@ -40,12 +40,12 @@
                  class="form-control" onKeyUp="AjaxZip3.zip2addr(this,'','oldAddress','oldAddress');"/>
         </div>
         <div class="form-group">
-          <label for="oldAddress">転居先 住所</label>
+          <label for="oldAddress">転居元 住所</label>
           <input required placeholder="例：浜市浜区浜町1-2-3" maxlength='161' type="text" id="oldAddress" name="oldAddress" th:field="*{oldAddress}"
                  class="form-control" value="新宿区西新宿1-1-1"/>
         </div>
         <div class="form-group">
-          <label>転居元 郵便番号 （*任意）</label>
+          <label>転居先 郵便番号 （*任意）</label>
           <input placeholder="例：123-4567" maxlength='8' type="text" id="newZip" name="newZip"
                  class="form-control" onKeyUp="AjaxZip3.zip2addr(this,'','newAddress','newAddress');"/>
         </div>
