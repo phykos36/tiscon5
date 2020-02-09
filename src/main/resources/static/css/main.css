@@ -202,8 +202,16 @@ td {
     width: 400px;
 }
 
+fieldset {
+    margin: 15px 0;;
+}
+
 .form-control.number-form {
     width: 70px;
+}
+
+.form-control.washing-machine-installation-form {
+    width: 100px;
 }
 
  .mitsumori{
@@ -214,6 +222,7 @@ td {
  .under{
      text-decoration:underline;
      font-size: 80px;
+     margin: 0 30px;
  }
 
  .left{
@@ -223,7 +232,7 @@ td {
 
  .right{
      text-align: right;
-     margin: 0px 150px 5px 0px;
+     margin: 0px 0px 5px 0px;
  }
 
 
@@ -233,8 +242,28 @@ td {
  }
 
  .margin{
-     margin-right: 115px;
+     margin-left: 115px;
  }
+
+@media screen and (max-width: 480px) {
+    .margin {
+        margin-left: 75px;
+    }
+    .left {
+         margin: 10px 0px 0px 0px;
+         font-size: 24px;
+    }
+    .right {
+        text-align: right;
+        margin: 0px 0px 5px 0px;
+    }
+
+     .under{
+         text-decoration:underline;
+         font-size: 46px;
+         margin: 0 10px;
+     }
+}
 
  .btn-negative{
      background: #BBBBBB;
@@ -258,6 +287,14 @@ td {
    background-image: linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%);
    transition: .4s;
  }
+ .btn-gradient-radius.leftt {
+   margin-left: 115px;
+ }
+@media screen and (max-width: 480px) {
+    .btn-gradient-radius.leftt {
+        margin-left: 15px;
+    }
+}
 
  .btn-gradient-radius:hover {
    background-image: linear-gradient(45deg, #FFC107 0%, #f76a35 100%);

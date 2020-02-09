@@ -17,7 +17,7 @@
   <form th:action="@{/order}" th:object="${userOrderForm}" class="form-horizontal" method="post">
   <h1>お見積り結果</h1>
     <div class="col-sm-12">
-      <div class="left">今回のお見積り結果は</div><p></p><div class="mitsumori">およそ　　<span class="under" th:text="${price}"></span>　　円<p></p><div class="right">です。</div></div>
+      <div class="left">今回のお見積り結果は</div><p></p><div class="mitsumori">およそ<span class="under" th:text="${price}"></span><span class="right"><span class="en">円</span>です。</span></div>
       <div class="irai">「入力した条件で正式に見積を依頼したい！」そんな方は下記のボタンからご依頼ください。</div>
       <div class="form-group">
         <div class="text-center">
@@ -90,8 +90,8 @@
       </table>
       <div class="form-group">
         <div class="text-center top">
-          <button type="submit" name="backToInput" class="btn btn-negative margin" formaction="input">修正する</button>
-          <button type="submit" name="complete" class="btn-gradient-radius">正式見積もり依頼</button>
+          <button type="submit" name="backToInput" class="btn btn-negative" formaction="input">修正する</button>
+          <button type="submit" name="complete" class="btn-gradient-radius leftt">正式見積もり依頼</button>
         </div>
       </div>
     </div>
