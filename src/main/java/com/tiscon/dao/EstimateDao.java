@@ -37,11 +37,19 @@ public class EstimateDao {
      * @return 登録件数
      */
     public int insertCustomer(Customer customer) {
-        String sql = "INSERT INTO CUSTOMER(CUSTOMER_NAME, TEL, EMAIL, OLD_ADDRESS, NEW_ADDRESS)"
-                + " VALUES(:customerName, :tel, :email, :oldAddress, :newAddress)";
-        KeyHolder keyHolder = new GeneratedKeyHolder();
-        int resultNum = parameterJdbcTemplate.update(sql, new BeanPropertySqlParameterSource(customer), keyHolder);
-        customer.setCustomerId(keyHolder.getKey().intValue());
+        String sql = "UPDATE CUSTOMER SET CUSTOMER_NAME = :customerName, TEL = :tel, EMAIL = :email, OLD_ADDRESS = :oldAddress, NEW_ADDRESS = :newAddress"
+        +" WHERE CUSTOMER_NAME = :customerName AND TEL = :tel";
+        //  keyHolder = new GeneratedKeyHolder();
+        int resultNum = parameterJdbcTemplate.update(sql, new BeanPropertySqlParameterSource(customer));
+        if(resultNum == 0){
+            parameterJdbcTemplate.update("INSERT INTO CUSTOMER(CUSTOMER_NAME, TEL, EMAIL, OLD_ADDRESS, NEW_ADDRESS)"
+                            +" VALUES(:customerName, :tel, :email, :oldAddress, :newAddress)",
+                    new BeanPropertySqlParameterSource(customer));
+        }
+        // customer.setCustomerId(keyHolder.getKey().intValue());
+        customer.setCustomerId(parameterJdbcTemplate.queryForObject("SELECT CUSTOMER_ID FROM CUSTOMER"
+                        +" WHERE CUSTOMER_NAME = :customerName AND TEL = :tel",
+                new BeanPropertySqlParameterSource(customer),Integer.TYPE));
         return resultNum;
     }
 
@@ -64,11 +72,17 @@ public class EstimateDao {
      * @return 登録件数
      */
     public int[] batchInsertCustomerPackage(List<CustomerPackage> packages) {
-        String sql = "INSERT INTO CUSTOMER_PACKAGE(CUSTOMER_ID, PACKAGE_ID, PACKAGE_NUMBER)"
-                + " VALUES(:customerId, :packageId, :packageNumber)";
-        SqlParameterSource[] batch = SqlParameterSourceUtils.createBatch(packages.toArray());
 
-        return parameterJdbcTemplate.batchUpdate(sql, batch);
+        String sql = "UPDATE CUSTOMER_PACKAGE SET CUSTOMER_ID = :customerId, PACKAGE_ID = :packageId, PACKAGE_NUMBER = :packageNumber"
+                +" WHERE CUSTOMER_ID = :customerId AND PACKAGE_ID = :packageId";
+        SqlParameterSource[] batch = SqlParameterSourceUtils.createBatch(packages.toArray());
+        int[] resultNums = parameterJdbcTemplate.batchUpdate(sql, batch);
+        if(resultNums[0]==0 || resultNums[1]==0 || resultNums[2]==0 || resultNums[3]==0){
+            sql = "INSERT INTO CUSTOMER_PACKAGE(CUSTOMER_ID, PACKAGE_ID, PACKAGE_NUMBER)"
+                    + " VALUES(:customerId, :packageId, :packageNumber)";
+            resultNums = parameterJdbcTemplate.batchUpdate(sql, batch);
+        }
+        return resultNums;
     }
 
     /**
