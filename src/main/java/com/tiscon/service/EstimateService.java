@@ -11,9 +11,14 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.tiscon.jackson.Json2Java;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
 /**
  * 引越し見積もり機能において業務処理を担当するクラス。
  *
@@ -70,9 +75,11 @@ public class EstimateService {
      * @return 概算見積もり結果の料金
      */
     public Integer getPrice(UserOrderDto dto) {
-        double distance = estimateDAO.getDistance(dto.getOldPrefectureId(), dto.getNewPrefectureId());
-        // 小数点以下を切り捨てる
-        int distanceInt = (int) Math.floor(distance);
+//        double distance = estimateDAO.getDistance(dto.getOldPrefectureId(), dto.getNewPrefectureId());
+//        // 小数点以下を切り捨てる
+//        int distanceInt = (int) Math.floor(distance);
+
+        int distanceInt = getDirectionDistance(dto.getOldAddress(), dto.getNewAddress());
 
         // 距離当たりの料金を算出する
         int priceForDistance = distanceInt * PRICE_PER_DISTANCE;
@@ -104,5 +111,44 @@ public class EstimateService {
      */
     private int getBoxForPackage(int packageNum, PackageType type) {
         return packageNum * estimateDAO.getBoxPerPackage(type.getCode());
+    }
+
+    /**
+     * 住所間の経路の距離を取得する。
+     *
+     * @param addressFrom 引っ越し元の都道府県
+     * @param addressTo   引越し先の都道府県
+     * @return 距離[km]
+     */
+
+    public static int getDirectionDistance(String addressFrom, String addressTo) {
+        HttpURLConnection http = null;
+        StringBuffer json = new StringBuffer();
+        String apiUrl = "https://maps.googleapis.com/maps/api/directions/json";
+        apiUrl += "?origin="+addressFrom;
+        apiUrl += "&destination="+addressTo;
+        apiUrl += "&key=AIzaSyCXTD37wn_woDNvf1nWo4oTf4q8xsTvIqI";
+        try {
+            URL url = new URL(apiUrl);
+            http = (HttpURLConnection) url.openConnection();
+            http.setRequestMethod("GET");
+            http.connect();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(http.getInputStream()));
+            String line;
+            while ((line = reader.readLine()) != null)
+                json.append(line);
+
+        } catch (IOException e) {
+            System.out.println(e);
+        } finally {
+            http.disconnect();
+        }
+
+        Json2Java json2Java = new Json2Java();
+        int distanceMeter = json2Java.main(json.toString());
+        int distanceKm = (int) Math.floor(distanceMeter / 1000);
+
+        return distanceKm;
     }
 }
