@@ -7,11 +7,11 @@ public class UserOrderDto {
 
     private String email;
 
-    private String oldPrefectureId;
+//    private String oldPrefectureId;
 
     private String oldAddress;
 
-    private String newPrefectureId;
+//    private String newPrefectureId;
 
     private String newAddress;
 
@@ -49,13 +49,13 @@ public class UserOrderDto {
         this.email = email;
     }
 
-    public String getOldPrefectureId() {
-        return oldPrefectureId;
-    }
-
-    public void setOldPrefectureId(String oldPrefectureId) {
-        this.oldPrefectureId = oldPrefectureId;
-    }
+//    public String getOldPrefectureId() {
+//        return oldPrefectureId;
+//    }
+//
+//    public void setOldPrefectureId(String oldPrefectureId) {
+//        this.oldPrefectureId = oldPrefectureId;
+//    }
 
     public String getOldAddress() {
         return oldAddress;
@@ -65,13 +65,13 @@ public class UserOrderDto {
         this.oldAddress = oldAddress;
     }
 
-    public String getNewPrefectureId() {
-        return newPrefectureId;
-    }
-
-    public void setNewPrefectureId(String newPrefectureId) {
-        this.newPrefectureId = newPrefectureId;
-    }
+//    public String getNewPrefectureId() {
+//        return newPrefectureId;
+//    }
+//
+//    public void setNewPrefectureId(String newPrefectureId) {
+//        this.newPrefectureId = newPrefectureId;
+//    }
 
     public String getNewAddress() {
         return newAddress;

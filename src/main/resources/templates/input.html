@@ -27,7 +27,7 @@
           <input required placeholder="例：浜子　太郎" maxlength='60' type="text" id="customerName" name="customerName" th:field="*{customerName}" class="form-control" value="山田太郎"/>
         </div>
         <div class="form-group">
-          <label for="tel">連絡先TEL ＊半角数字,ハイフンなし</label>
+          <label for="tel">連絡先TEL ＊半角数字、ハイフンなし</label>
           <input required placeholder="例：08011112222"　maxlength='21' pattern="^\d+$" title="半角数字でご入力ください。" type="tel" id="tel" name="tel" th:field="*{tel}" class="form-control" value="03-1234-5678"/>
         </div>
         <div class="form-group">
@@ -35,25 +35,23 @@
           <input required placeholder="例：hamakko@tis.com" maxlength='254' pattern="^[ -~]+$" title="半角でご入力ください。" type="email" id="email" name="email" th:field="*{email}" class="form-control" value="test@test.com"/>
         </div>
         <div class="form-group">
-          <label for="oldPrefectureId">転居元住所（都道府県）</label>
-          <select id="oldPrefectureId" name="oldPrefectureId" class="form-control">
-            <option th:each="prefecture : ${prefectures}" th:value="${prefecture.prefectureId}" th:field="*{oldPrefectureId}">[[${prefecture.prefectureName}]]</option>
-          </select>
+          <label>転居元郵便番号 （*任意）</label>
+          <input placeholder="例：123-4567" maxlength='8' type="text" id="oldZip" name="oldZip"
+                 class="form-control" onKeyUp="AjaxZip3.zip2addr(this,'','oldAddress','oldAddress');"/>
         </div>
         <div class="form-group">
-          <label for="oldAddress">転居元住所（市区町村以下）</label>
-          <input required placeholder="例：浜市浜区浜町１－２－３" maxlength='161' type="text" id="oldAddress" name="oldAddress" th:field="*{oldAddress}"
+          <label for="oldAddress">転居元住所</label>
+          <input required placeholder="例：浜市浜区浜町1-2-3" maxlength='161' type="text" id="oldAddress" name="oldAddress" th:field="*{oldAddress}"
                  class="form-control" value="新宿区西新宿1-1-1"/>
         </div>
         <div class="form-group">
-          <label for="newPrefectureId">転居先住所（都道府県）</label>
-          <select id="newPrefectureId" name="newPrefectureId" class="form-control">
-            <option th:each="prefecture : ${prefectures}" th:value="${prefecture.prefectureId}" th:field="*{newPrefectureId}">[[${prefecture.prefectureName}]]</option>
-          </select>
+          <label>転居元郵便番号 （*任意）</label>
+          <input placeholder="例：123-4567" maxlength='8' type="text" id="newZip" name="newZip"
+                 class="form-control" onKeyUp="AjaxZip3.zip2addr(this,'','newAddress','newAddress');"/>
         </div>
         <div class="form-group">
-          <label for="newAddress">転居先住所（市区町村以下）</label>
-          <input required placeholder="例：浜市浜区浜町１－２－３" maxlength='161' type="text" id="newAddress" name="newAddress" th:field="*{newAddress}"
+          <label for="newAddress">転居先住所</label>
+          <input required placeholder="例：浜市浜区浜町1-2-3" maxlength='161' type="text" id="newAddress" name="newAddress" th:field="*{newAddress}"
                  class="form-control" value="札幌市南区1"/>
         </div>
       </fieldset>
@@ -97,6 +95,7 @@
 <script src="../js/jquery-3.4.1.min.js" th:src="@{/js/jquery-3.4.1.min.js}"></script>
 <script src="../js/popper.min.js" th:src="@{/js/popper.min.js}"></script>
 <script src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+<script src="../js/ajaxzip3.js" th:src="@{/js/ajaxzip3.js}"></script>
 </body>
 
 </html>
