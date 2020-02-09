@@ -20,9 +20,14 @@ body {
     background: #FBC0AF;
     border-color: #FBC0AF;
 }
-
 .btn-top {
-    width: 30%;
+    width: auto;
+    min-width: 30%;
+}
+@media screen and (max-width: 480px) {
+    .display-1 {
+        font-size: 24px;
+    }
 }
 
 .ui.main.container {
