@@ -193,6 +193,8 @@ ul.label {
     border: 1px solid rgba(34,36,38,.15);
 }
 
-td {
-    width: 400px;
+
+.form-control.number-form {
+    width: 70px;
+
 }
