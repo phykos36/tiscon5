@@ -15,10 +15,16 @@
 <nav th:insert="header.html :: header"></nav>
 <div class="container">
   <form th:action="@{/order}" th:object="${userOrderForm}" class="form-horizontal" method="post">
-    <h1>概算お見積り結果</h1>
+  <h1>お見積り結果</h1>
     <div class="col-sm-12">
-      <div class="left">概算お見積り結果は</div><p></p><div class="mitsumori"><span class="under" th:text="${price}"></span> 円<p></p><div class="right">です。</div></div>
-      <h4>個人情報</h4>
+      <div class="left">今回のお見積り結果は</div><p></p><div class="mitsumori">およそ　　<span class="under" th:text="${price}"></span>　　円<p></p><div class="right">です。</div></div>
+      <div class="irai">「入力した条件で正式に見積を依頼したい！」そんな方は下記のボタンからご依頼ください。</div>
+      <div class="form-group">
+        <div class="text-center">
+          <button type="submit" name="complete" class="btn-gradient-radius">正式見積もり依頼</button>
+        </div>
+      </div>
+      <h4>ご登録情報</h4>
       <table class="table table-bordered">
         <col span="1" style="background-color: #A9B7C7;">
         <col span="2" style="background-color: #FFFFFF;">
@@ -97,9 +103,9 @@
         </tbody>
       </table>
       <div class="form-group">
-        <div class="text-center">
-          <button type="submit" name="backToInput" class="btn btn-primary" formaction="input">戻る</button>
-          <button type="submit" name="complete" class="btn btn-primary">詳細見積もり依頼</button>
+        <div class="text-center top">
+          <button type="submit" name="backToInput" class="btn btn-negative margin" formaction="input">修正する</button>
+          <button type="submit" name="complete" class="btn-gradient-radius">正式見積もり依頼</button>
         </div>
       </div>
     </div>
