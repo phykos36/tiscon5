@@ -37,14 +37,13 @@ public class EstimateDao {
      * @return 登録件数
      */
     public int insertCustomer(Customer customer) {
-        String sql = "UPDATE CUSTOMER SET OLD_PREFECTURE_ID = :oldPrefectureId, NEW_PREFECTURE_ID = :newPrefectureId,"
-        +" CUSTOMER_NAME = :customerName, TEL = :tel, EMAIL = :email, OLD_ADDRESS = :oldAddress, NEW_ADDRESS = :newAddress"
+        String sql = "UPDATE CUSTOMER SET CUSTOMER_NAME = :customerName, TEL = :tel, EMAIL = :email, OLD_ADDRESS = :oldAddress, NEW_ADDRESS = :newAddress"
         +" WHERE CUSTOMER_NAME = :customerName AND TEL = :tel";
         //  keyHolder = new GeneratedKeyHolder();
         int resultNum = parameterJdbcTemplate.update(sql, new BeanPropertySqlParameterSource(customer));
         if(resultNum == 0){
-            parameterJdbcTemplate.update("INSERT INTO CUSTOMER(OLD_PREFECTURE_ID, NEW_PREFECTURE_ID, CUSTOMER_NAME, TEL, EMAIL, OLD_ADDRESS, NEW_ADDRESS)"
-                            +" VALUES(:oldPrefectureId, :newPrefectureId, :customerName, :tel, :email, :oldAddress, :newAddress)",
+            parameterJdbcTemplate.update("INSERT INTO CUSTOMER(CUSTOMER_NAME, TEL, EMAIL, OLD_ADDRESS, NEW_ADDRESS)"
+                            +" VALUES(:customerName, :tel, :email, :oldAddress, :newAddress)",
                     new BeanPropertySqlParameterSource(customer));
         }
         // customer.setCustomerId(keyHolder.getKey().intValue());
